@@ -1,0 +1,38 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "indent": [true, "spaces"],
+    "arrow-parens": false,
+    "member-access": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "public-instance-field",
+          "public-constructor",
+          "private-static-field",
+          "private-instance-field",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "max-line-length": false,
+    "max-classes-per-file": false,
+    "no-string-literal": false,
+    "no-var-requires": false,
+    "no-console": [true, "log", "warning", "info"],
+    "quotemark": [true, "single", "avoid-escape"],
+    "variable-name": false,
+    "object-literal-sort-keys": false,
+    "object-literal-shorthand": false,
+    "only-arrow-functions": false,
+    "ordered-imports": false,
+    "trailing-comma": [true, {"singleline": "never", "multiline": "always"}],
+    "typedef-whitespace": false,
+    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"]
+  }
+}

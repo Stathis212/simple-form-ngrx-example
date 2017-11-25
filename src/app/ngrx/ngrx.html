@@ -1,0 +1,12 @@
+<input class="form-control" (keyup)="onKey($event)">
+<small id="Help" class="form-text text-muted">e.g. London</small>
+<br>
+<p>You have entered: {{city}}</p>
+<br>
+<button class="btn btn-primary" (click)="getWeather()">Submit</button>
+<br><br>
+<div *ngIf="response != null" class="card">
+    <div class="card-body">
+        {{response | json}}
+    </div>
+</div>
