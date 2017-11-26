@@ -1,13 +1,27 @@
-<form name="registrationForm" (ngSubmit)="onRegister()" [formGroup]="registrationForm">
+<form *ngIf="!(service.registered$ | async)" name="registrationForm" (ngSubmit)="onRegister()" [formGroup]="registrationForm">
     <div class="form-group">
-        <input formControlName="Email" type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email" [class.has-error]="!registrationForm.controls['Email'].valid && registrationForm.controls['Email'].touched">
+        <input formControlName="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" [class.is-invalid]="!registrationForm.controls['email'].valid && registrationForm.controls['email'].touched">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['email'].hasError('required') && registrationForm.controls['email'].touched">You must include an e-mail address.</div>
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['email'].hasError('invalidEmailAddress') && registrationForm.controls['email'].touched">This is not a valid email address.</div>
     </div>
     <div class="form-group">
-        <input formControlName='Password' type="password" class="form-control" id="Password" placeholder="Password" [class.has-error]="!registrationForm.controls['Password'].valid && registrationForm.controls['Password'].touched">
+        <input formControlName='password' type="password" class="form-control" id="password" placeholder="Password" [class.is-invalid]="!registrationForm.controls['password'].valid && registrationForm.controls['password'].touched">
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['password'].hasError('required') &amp;&amp; registrationForm.controls['password'].touched">You must include a Password.</div>
+            <div class="invalid-feedback" *ngIf="!registrationForm.controls['password'].valid &amp;&amp; registrationForm.controls['password'].touched">Your Password must contain at least one uppercase letter, one number and 6 characters in total.</div>
     </div>
     <div class="form-group">
-        <input formControlName='ConfirmPassword' type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm Password" [class.has-error]="!registrationForm.controls['ConfirmPassword'].valid && registrationForm.controls['ConfirmPassword'].touched">
+        <input formControlName='confirmPassword' type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" [class.is-invalid]="!registrationForm.controls['confirmPassword'].valid && registrationForm.controls['confirmPassword'].touched">
+        <div class="invalid-feedback" *ngIf="registrationForm.controls['confirmPassword'].hasError('required') &amp;&amp; registrationForm.controls['confirmPassword'].touched">You must confirm your Password.</div>
+            <div class="invalid-feedback" *ngIf="registrationForm.controls['confirmPassword'].hasError('MatchPassword') &amp;&amp; registrationForm.controls['confirmPassword'].touched">This value does not match your password above.</div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]='!registrationForm.valid'>Submit</button>
+    <button type="reset" class="btn btn-light" (click)="reset()">Reset</button>
 </form>
+<br>
+<br>
+<div>
+    <p>User has registered: {{service.registered$ | async}}</p>
+    <p>Token: {{service.token$ | async | json}}</p>
+    <button *ngIf="(service.registered$ | async)" type="reset" class="btn btn-success" (click)="newUser()">New User</button>
+</div>

@@ -7,7 +7,7 @@ export class RegisterApi {
     constructor(private api: Api) {}
 
     register(user) {
-        return this.api.get('api/register', user);
+        return this.api.post('api/register', user);
     }
 
 }

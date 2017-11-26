@@ -47,10 +47,10 @@ export class ValidationService {
   }
 
   MatchPassword(AC: AbstractControl) {
-    const password = AC.get('Password').value; // to get value in input tag
-    const confirmPassword = AC.get('ConfirmPassword').value; // to get value in input tag
+    const password = AC.get('password').value; // to get value in input tag
+    const confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
     if (password !== confirmPassword) {
-      AC.get('ConfirmPassword').setErrors( {MatchPassword: true} );
+      AC.get('confirmPassword').setErrors( {MatchPassword: true} );
     } else {
       return null;
     }

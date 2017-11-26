@@ -30,9 +30,14 @@ export class RegisterService {
     this.store.dispatch({ type: 'USER_REGISTERING' });
     this.api.register(user).subscribe((payload) => {
       this.store.dispatch({ type: 'USER_REGISTRATION_SUCCESSFUL', payload: payload });
+      localStorage.setItem('id_token', payload.token);
     }, (payload) => {
       this.store.dispatch({ type: 'USER_REGISTRATION_FAIL', payload: payload });
     });
+  }
+
+  newUser() {
+    this.store.dispatch({ type: 'NEW_USER' });
   }
 
 }

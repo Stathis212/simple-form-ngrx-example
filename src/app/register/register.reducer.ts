@@ -31,12 +31,16 @@ export const RegisterReducer = (state: any = initialState, action: Action) => {
         return state.set('registering', false)
                     .set('registered', true)
                     .set('failed', false)
-                    .set('token', toPayload(action));
+                    .set('token', toPayload(action).token);
 
     case 'USER_REGISTRATION_FAIL':
         return state.set('registering', false)
                     .set('registered', false)
                     .set('failed', true)
+                    .set('token', null);
+
+    case 'NEW_USER':
+        return state.set('registered', false)
                     .set('token', null);
 
     default:
